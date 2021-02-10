@@ -259,8 +259,10 @@ class TorchConverter:
         # those modules. The resulting graph will be self-contained and will
         # not reference into other modules. Params will contain the "trainable"
         # inputs to the graph.
+
+        # forward_simple is set for compatibility with mmsegmentation
         graph, params = _torch._C._jit_pass_lower_graph(
-            torchscript.forward.graph, torchscript._c
+            torchscript.forward_simple.graph, torchscript._c
         )
 
         # From PyTorch code: Inline function and method calls.
